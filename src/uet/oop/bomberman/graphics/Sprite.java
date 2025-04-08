@@ -2,12 +2,6 @@ package uet.oop.bomberman.graphics;
 
 import javafx.scene.image.*;
 
-import java.awt.image.BufferedImage;
-import java.nio.IntBuffer;
-
-/**
- * Lưu trữ thông tin các pixel của 1 sprite (hình ảnh game)
- */
 public class Sprite {
 
 	public static final int DEFAULT_SIZE = 16;
@@ -20,21 +14,23 @@ public class Sprite {
 	protected int _realHeight;
 	private SpriteSheet _sheet;
 
+	public static Sprite transparent = new Sprite(DEFAULT_SIZE, 15, 15, SpriteSheet.tiles, 16, 16);
+
 	/*
-	|--------------------------------------------------------------------------
-	| Board sprites
-	|--------------------------------------------------------------------------
-	 */
+    |--------------------------------------------------------------------------
+    | Board sprites
+    |--------------------------------------------------------------------------
+     */
 	public static Sprite grass = new Sprite(DEFAULT_SIZE, 6, 0, SpriteSheet.tiles, 16, 16);
 	public static Sprite brick = new Sprite(DEFAULT_SIZE, 7, 0, SpriteSheet.tiles, 16, 16);
 	public static Sprite wall = new Sprite(DEFAULT_SIZE, 5, 0, SpriteSheet.tiles, 16, 16);
 	public static Sprite portal = new Sprite(DEFAULT_SIZE, 4, 0, SpriteSheet.tiles, 14, 14);
 
 	/*
-	|--------------------------------------------------------------------------
-	| Bomber Sprites
-	|--------------------------------------------------------------------------
-	 */
+    |--------------------------------------------------------------------------
+    | Bomber Sprites
+    |--------------------------------------------------------------------------
+     */
 	public static Sprite player_up = new Sprite(DEFAULT_SIZE, 0, 0, SpriteSheet.tiles, 12, 16);
 	public static Sprite player_down = new Sprite(DEFAULT_SIZE, 2, 0, SpriteSheet.tiles, 12, 15);
 	public static Sprite player_left = new Sprite(DEFAULT_SIZE, 3, 0, SpriteSheet.tiles, 10, 15);
@@ -47,7 +43,7 @@ public class Sprite {
 	public static Sprite player_down_2 = new Sprite(DEFAULT_SIZE, 2, 2, SpriteSheet.tiles, 12, 16);
 
 	public static Sprite player_left_1 = new Sprite(DEFAULT_SIZE, 3, 1, SpriteSheet.tiles, 11, 16);
-	public static Sprite player_left_2 = new Sprite(DEFAULT_SIZE, 3, 2, SpriteSheet.tiles, 12 ,16);
+	public static Sprite player_left_2 = new Sprite(DEFAULT_SIZE, 3, 2, SpriteSheet.tiles, 12, 16);
 
 	public static Sprite player_right_1 = new Sprite(DEFAULT_SIZE, 1, 1, SpriteSheet.tiles, 11, 16);
 	public static Sprite player_right_2 = new Sprite(DEFAULT_SIZE, 1, 2, SpriteSheet.tiles, 12, 16);
@@ -57,20 +53,20 @@ public class Sprite {
 	public static Sprite player_dead3 = new Sprite(DEFAULT_SIZE, 6, 2, SpriteSheet.tiles, 16, 16);
 
 	/*
-	|--------------------------------------------------------------------------
-	| Character
-	|--------------------------------------------------------------------------
-	 */
+    |--------------------------------------------------------------------------
+    | Character
+    |--------------------------------------------------------------------------
+     */
 	//BALLOM
-	public static Sprite balloom_left1 = new Sprite(DEFAULT_SIZE, 9, 0, SpriteSheet.tiles, 16, 16);
-	public static Sprite balloom_left2 = new Sprite(DEFAULT_SIZE, 9, 1, SpriteSheet.tiles, 16, 16);
-	public static Sprite balloom_left3 = new Sprite(DEFAULT_SIZE, 9, 2, SpriteSheet.tiles, 16, 16);
+	public static Sprite ballom_left1 = new Sprite(DEFAULT_SIZE, 9, 0, SpriteSheet.tiles, 16, 16);
+	public static Sprite ballom_left2 = new Sprite(DEFAULT_SIZE, 9, 1, SpriteSheet.tiles, 16, 16);
+	public static Sprite ballom_left3 = new Sprite(DEFAULT_SIZE, 9, 2, SpriteSheet.tiles, 16, 16);
 
-	public static Sprite balloom_right1 = new Sprite(DEFAULT_SIZE, 10, 0, SpriteSheet.tiles, 16, 16);
-	public static Sprite balloom_right2 = new Sprite(DEFAULT_SIZE, 10, 1, SpriteSheet.tiles, 16, 16);
-	public static Sprite balloom_right3 = new Sprite(DEFAULT_SIZE, 10, 2, SpriteSheet.tiles, 16, 16);
+	public static Sprite ballom_right1 = new Sprite(DEFAULT_SIZE, 10, 0, SpriteSheet.tiles, 16, 16);
+	public static Sprite ballom_right2 = new Sprite(DEFAULT_SIZE, 10, 1, SpriteSheet.tiles, 16, 16);
+	public static Sprite ballom_right3 = new Sprite(DEFAULT_SIZE, 10, 2, SpriteSheet.tiles, 16, 16);
 
-	public static Sprite balloom_dead = new Sprite(DEFAULT_SIZE, 9, 3, SpriteSheet.tiles, 16, 16);
+	public static Sprite ballom_dead = new Sprite(DEFAULT_SIZE, 9, 3, SpriteSheet.tiles, 16, 16);
 
 	//ONEAL
 	public static Sprite oneal_left1 = new Sprite(DEFAULT_SIZE, 11, 0, SpriteSheet.tiles, 16, 16);
@@ -122,19 +118,19 @@ public class Sprite {
 	public static Sprite mob_dead3 = new Sprite(DEFAULT_SIZE, 15, 2, SpriteSheet.tiles, 16, 16);
 
 	/*
-	|--------------------------------------------------------------------------
-	| Bomb Sprites
-	|--------------------------------------------------------------------------
-	 */
+    |--------------------------------------------------------------------------
+    | Bomb Sprites
+    |--------------------------------------------------------------------------
+     */
 	public static Sprite bomb = new Sprite(DEFAULT_SIZE, 0, 3, SpriteSheet.tiles, 15, 15);
 	public static Sprite bomb_1 = new Sprite(DEFAULT_SIZE, 1, 3, SpriteSheet.tiles, 13, 15);
 	public static Sprite bomb_2 = new Sprite(DEFAULT_SIZE, 2, 3, SpriteSheet.tiles, 12, 14);
 
 	/*
-	|--------------------------------------------------------------------------
-	| FlameSegment Sprites
-	|--------------------------------------------------------------------------
-	 */
+    |--------------------------------------------------------------------------
+    | FlameSegment Sprites
+    |--------------------------------------------------------------------------
+     */
 	public static Sprite bomb_exploded = new Sprite(DEFAULT_SIZE, 0, 4, SpriteSheet.tiles, 16, 16);
 	public static Sprite bomb_exploded1 = new Sprite(DEFAULT_SIZE, 0, 5, SpriteSheet.tiles, 16, 16);
 	public static Sprite bomb_exploded2 = new Sprite(DEFAULT_SIZE, 0, 6, SpriteSheet.tiles, 16, 16);
@@ -164,19 +160,19 @@ public class Sprite {
 	public static Sprite explosion_vertical_down_last2 = new Sprite(DEFAULT_SIZE, 3, 6, SpriteSheet.tiles, 16, 16);
 
 	/*
-	|--------------------------------------------------------------------------
-	| Brick FlameSegment
-	|--------------------------------------------------------------------------
-	 */
+    |--------------------------------------------------------------------------
+    | Brick FlameSegment
+    |--------------------------------------------------------------------------
+     */
 	public static Sprite brick_exploded = new Sprite(DEFAULT_SIZE, 7, 1, SpriteSheet.tiles, 16, 16);
 	public static Sprite brick_exploded1 = new Sprite(DEFAULT_SIZE, 7, 2, SpriteSheet.tiles, 16, 16);
 	public static Sprite brick_exploded2 = new Sprite(DEFAULT_SIZE, 7, 3, SpriteSheet.tiles, 16, 16);
 
 	/*
-	|--------------------------------------------------------------------------
-	| Powerups
-	|--------------------------------------------------------------------------
-	 */
+    |--------------------------------------------------------------------------
+    | Powerups
+    |--------------------------------------------------------------------------
+     */
 	public static Sprite powerup_bombs = new Sprite(DEFAULT_SIZE, 0, 10, SpriteSheet.tiles, 16, 16);
 	public static Sprite powerup_flames = new Sprite(DEFAULT_SIZE, 1, 10, SpriteSheet.tiles, 16, 16);
 	public static Sprite powerup_speed = new Sprite(DEFAULT_SIZE, 2, 10, SpriteSheet.tiles, 16, 16);
@@ -216,26 +212,6 @@ public class Sprite {
 		}
 	}
 
-	public static Sprite movingSprite(Sprite normal, Sprite x1, Sprite x2, int animate, int time) {
-		int calc = animate % time;
-		int diff = time / 3;
-
-		if(calc < diff) {
-			return normal;
-		}
-
-		if(calc < diff * 2) {
-			return x1;
-		}
-
-		return x2;
-	}
-
-	public static Sprite movingSprite(Sprite x1, Sprite x2, int animate, int time) {
-		int diff = time / 2;
-		return (animate % time > diff) ? x1 : x2;
-	}
-
 	public int getSize() {
 		return SIZE;
 	}
@@ -245,21 +221,20 @@ public class Sprite {
 	}
 
 	public Image getFxImage() {
-        WritableImage wr = new WritableImage(SIZE, SIZE);
-        PixelWriter pw = wr.getPixelWriter();
-        for (int x = 0; x < SIZE; x++) {
-            for (int y = 0; y < SIZE; y++) {
-                if ( _pixels[x + y * SIZE] == TRANSPARENT_COLOR) {
-                    pw.setArgb(x, y, 0);
-                }
-                else {
-                    pw.setArgb(x, y, _pixels[x + y * SIZE]);
-                }
-            }
-        }
-        Image input = new ImageView(wr).getImage();
-        return resample(input, SCALED_SIZE / DEFAULT_SIZE);
-    }
+		WritableImage wr = new WritableImage(SIZE, SIZE);
+		PixelWriter pw = wr.getPixelWriter();
+		for (int x = 0; x < SIZE; x++) {
+			for (int y = 0; y < SIZE; y++) {
+				if (_pixels[x + y * SIZE] == TRANSPARENT_COLOR) {
+					pw.setArgb(x, y, 0);
+				} else {
+					pw.setArgb(x, y, _pixels[x + y * SIZE]);
+				}
+			}
+		}
+		Image input = new ImageView(wr).getImage();
+		return resample(input, SCALED_SIZE / DEFAULT_SIZE);
+	}
 
 	private Image resample(Image input, int scaleFactor) {
 		final int W = (int) input.getWidth();

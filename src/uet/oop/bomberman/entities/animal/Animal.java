@@ -15,8 +15,7 @@ public abstract class Animal extends Entity {
         super(xUnit, yUnit, img);
     }
 
-    public Animal(int xUnit, int yUnit, Image img, int isMove, int swap, String direction, int count, int countToRun) {
-        super(xUnit, yUnit, img);
+    public Animal(int isMove, int swap, String direction, int count, int countToRun) {
         this.isMove = isMove;
         this.swap = swap;
         this.direction = direction;
@@ -77,7 +76,7 @@ public abstract class Animal extends Entity {
     }
 
     public Animal() {
-        super();
+
     }
 
     @Override
