@@ -1,4 +1,4 @@
-package uet.oop.bomberman.entities;
+package uet.oop.bomberman.entities.animal;
 
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.GraphicsContext;
@@ -7,46 +7,97 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import uet.oop.bomberman.graphics.Sprite;
 
-public class Bomber extends Entity {
-    private int direction = 0; // 0: đứng yên, 1: trái, 2: phải, 3: lên, 4: xuống
+import static uet.oop.bomberman.BombermanGame.*;
+
+public class Bomber extends Animal {
+    public static int swapKill = 1;
+    private static int countKill = 0;
+
+    public Bomber(int x, int y, Image img, int isMove, int swap, String direction, int count, int countToRun) {
+        super(x, y, img, 8, 1, "down", 0, 0);
+    }
+
+    public Bomber() {
+    }
 
     public Bomber(int x, int y, Image img) {
         super(x, y, img);
     }
 
-    public void move(int dx, int dy) {
-        this.x += dx * Sprite.SCALED_SIZE;
-        this.y += dy * Sprite.SCALED_SIZE;
+    private void killBomber(Animal animal) {
+        if (countKill % 16 == 0) {
+            if (swapKill == 1) {
+                animal.setImg(Sprite.player_dead1.getFxImage());
+                swapKill = 2;
+            } else if (swapKill == 2) {
+                animal.setImg(Sprite.player_dead2.getFxImage());
+                swapKill = 3;
+            } else if (swapKill == 3) {
+                animal.setImg(Sprite.player_dead3.getFxImage());
+                swapKill = 4;
+            } else {
+                animal.setImg(Sprite.transparent.getFxImage());
+                running = false;
+                Image gameOver = new Image("images/gameOver.png");
+                authorView.setImage(gameOver);
+            }
+        }
+    }
 
-        if (dx == -1) direction = 1;
-        if (dx == 1) direction = 2;
-        if (dy == -1) direction = 3;
-        if (dy == 1) direction = 4;
+    private void checkBombs() {
+        if (listKill[player.getX() / 32][player.getY() / 32] == 4)
+            player.setLife(false);
+    }
+
+    private void checkEnemy() {
+        int ax = player.getX() / 32;
+        int ay = player.getY() / 32;
+        for (Animal animal : enemy) {
+            int bx = animal.getX() / 32;
+            int by = animal.getY() / 32;
+            if (ax == bx && ay == by
+                    || ax == bx && ay == by + 1 || ax == bx && ay == by - 1
+                    || ay == by && ax == bx + 1 || ay == by && ax == bx - 1) {
+                player.life = false;
+                break;
+            }
+        }
+    }
+
+    private void checkEnemy2() {    //easy level
+        int ax = player.getX();
+        int ay = player.getY();
+        for (Animal animal : enemy)
+            if (ax == animal.getX() && ay == animal.getY()
+                    || ax == animal.getX() && ay == animal.getY() - 32
+                    || ax == animal.getX() && ay == animal.getY() + 32
+                    || ay == animal.getY() && ax == animal.getX() - 32
+                    || ay == animal.getY() && ax == animal.getX() + 32) {
+                player.life = false;
+                break;
+            }
+    }
+
+    private void checkEnemy3() {
+        int ax = player.getX();
+        int ay = player.getY();
+        for (Animal animal : enemy) {
+            int bx = animal.getX();
+            int by = animal.getY();
+            if (ax == bx && by - 32 <= ay && by + 32 >= ay
+                    || ay == by && bx - 32 <= ax && bx + 32 >= ax) {
+                player.life = false;
+                break;
+            }
+        }
     }
 
     @Override
     public void update() {
-        // Cập nhật trạng thái, kiểm tra va chạm hoặc phím bấm
-    }
-
-    @Override
-    public void render(GraphicsContext gc) {
-        ImageView iv = new ImageView(img);
-        SnapshotParameters params = new SnapshotParameters();
-        params.setFill(Color.TRANSPARENT);
-
-        // Xoay ảnh theo hướng di chuyển
-        switch (direction) {
-            case 1 -> iv.setRotate(180); // Trái
-            case 2 -> iv.setRotate(0);   // Phải
-            case 3 -> iv.setRotate(-90); // Lên
-            case 4 -> iv.setRotate(90);  // Xuống
-        }
-
-        gc.drawImage(iv.snapshot(params, null), x, y);
-    }
-
-    public Bomb placeBomb() {
-        return new Bomb(x / Sprite.SCALED_SIZE, y / Sprite.SCALED_SIZE, Sprite.bomb);
+        checkBombs();
+        checkEnemy3();
+        countKill++;
+        if (!player.life)
+            killBomber(player);
     }
 }
