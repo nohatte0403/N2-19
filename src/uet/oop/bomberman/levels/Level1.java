@@ -23,7 +23,7 @@ public class Level1 {
         block.clear();
         swapKill = 1;
         powerBomb = 0;
-        new CreateMap("res/level/Level1.txt");
+        new CreateMap("res/levels/Level1.txt");
         player.setLife(true);
         player.setX(32);
         player.setY(32);
