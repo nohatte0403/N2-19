@@ -152,7 +152,7 @@ public class Move {
                 animal.setSwap(1);
             }
         }
-        if (animal instanceof Ballom && animal.getY() % 8 == 0) {
+        if (animal instanceof Balloon && animal.getY() % 8 == 0) {
             if (animal.getSwap() == 1) {
                 animal.setImg(Sprite.balloon_left1.getFxImage());
                 animal.setSwap(2);
