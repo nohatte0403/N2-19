@@ -12,7 +12,7 @@ public class Move {
             setDirection(animal.getDirection(), animal, 8 * speed);
             animal.setCount(animal.getCount() - 1);
         }
-        if ((animal instanceof Ballom || animal instanceof Oneal
+        if ((animal instanceof Balloon || animal instanceof Oneal
                 || animal instanceof Doll || animal instanceof Kondoria)
                 && animal.getCount() > 0) {
             setDirection(animal.getDirection(), animal, 4);

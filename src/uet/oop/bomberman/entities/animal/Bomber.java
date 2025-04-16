@@ -13,8 +13,8 @@ public class Bomber extends Animal {
     public static int swapKill = 1;
     private static int countKill = 0;
 
-    public Bomber(int x, int y, Image img, int isMove, int swap, String direction, int count, int countToRun) {
-        super(x, y, img, 8, 1, "down", 0, 0);
+    public Bomber(int isMove, int swap, String direction, int count, int countToRun) {
+        super(8, 1, "down", 0, 0);
     }
 
     public Bomber() {
