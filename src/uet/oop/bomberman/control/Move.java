@@ -48,7 +48,7 @@ public class Move {
                 animal.setCount(4 / speed);
                 checkRun(animal);
             }
-            if ((animal instanceof Ballom || animal instanceof Oneal || animal instanceof Doll)
+            if ((animal instanceof Balloon || animal instanceof Oneal || animal instanceof Doll)
                     && Blocked.block_down(animal)) {
                 animal.setDirection("down");
                 animal.setCount(8);
@@ -73,18 +73,18 @@ public class Move {
                 animal.setSwap(1);
             }
         }
-        if (animal instanceof Ballom && animal.getY() % 8 == 0) {
+        if (animal instanceof Balloon && animal.getY() % 8 == 0) {
             if (animal.getSwap() == 1) {
-                animal.setImg(Sprite.ballom_right1.getFxImage());
+                animal.setImg(Sprite.balloon_right1.getFxImage());
                 animal.setSwap(2);
             } else if (animal.getSwap() == 2) {
-                animal.setImg(Sprite.ballom_right2.getFxImage());
+                animal.setImg(Sprite.balloon_right2.getFxImage());
                 animal.setSwap(3);
             } else if (animal.getSwap() == 3) {
-                animal.setImg(Sprite.ballom_right3.getFxImage());
+                animal.setImg(Sprite.balloon_right3.getFxImage());
                 animal.setSwap(4);
             } else {
-                animal.setImg(Sprite.ballom_right2.getFxImage());
+                animal.setImg(Sprite.balloon_right2.getFxImage());
                 animal.setSwap(1);
             }
         }
@@ -127,7 +127,7 @@ public class Move {
                 animal.setCount(4 / speed);
                 checkRun(animal);
             }
-            if ((animal instanceof Ballom || animal instanceof Oneal || animal instanceof Doll)
+            if ((animal instanceof Balloon || animal instanceof Oneal || animal instanceof Doll)
                     && Blocked.block_up(animal)) {
                 animal.setDirection("up");
                 animal.setCount(8);
@@ -154,16 +154,16 @@ public class Move {
         }
         if (animal instanceof Ballom && animal.getY() % 8 == 0) {
             if (animal.getSwap() == 1) {
-                animal.setImg(Sprite.ballom_left1.getFxImage());
+                animal.setImg(Sprite.balloon_left1.getFxImage());
                 animal.setSwap(2);
             } else if (animal.getSwap() == 2) {
-                animal.setImg(Sprite.ballom_left2.getFxImage());
+                animal.setImg(Sprite.balloon_left2.getFxImage());
                 animal.setSwap(3);
             } else if (animal.getSwap() == 3) {
-                animal.setImg(Sprite.ballom_left3.getFxImage());
+                animal.setImg(Sprite.balloon_left3.getFxImage());
                 animal.setSwap(4);
             } else {
-                animal.setImg(Sprite.ballom_left2.getFxImage());
+                animal.setImg(Sprite.balloon_left2.getFxImage());
                 animal.setSwap(1);
             }
         }
@@ -206,7 +206,7 @@ public class Move {
                 animal.setCount(4 / speed);
                 checkRun(animal);
             }
-            if ((animal instanceof Ballom || animal instanceof Oneal
+            if ((animal instanceof Balloon || animal instanceof Oneal
                     || animal instanceof Doll || animal instanceof Kondoria)
                     && Blocked.block_left(animal)) {
                 animal.setDirection("left");
@@ -232,18 +232,18 @@ public class Move {
                 animal.setSwap(1);
             }
         }
-        if (animal instanceof Ballom && animal.getY() % 8 == 0) {
+        if (animal instanceof Balloon && animal.getY() % 8 == 0) {
             if (animal.getSwap() == 1) {
-                animal.setImg(Sprite.ballom_right1.getFxImage());
+                animal.setImg(Sprite.balloon_right1.getFxImage());
                 animal.setSwap(2);
             } else if (animal.getSwap() == 2) {
-                animal.setImg(Sprite.ballom_right2.getFxImage());
+                animal.setImg(Sprite.balloon_right2.getFxImage());
                 animal.setSwap(3);
             } else if (animal.getSwap() == 3) {
-                animal.setImg(Sprite.ballom_right3.getFxImage());
+                animal.setImg(Sprite.balloon_right3.getFxImage());
                 animal.setSwap(4);
             } else {
-                animal.setImg(Sprite.ballom_right2.getFxImage());
+                animal.setImg(Sprite.balloon_right2.getFxImage());
                 animal.setSwap(1);
             }
         }
@@ -301,7 +301,7 @@ public class Move {
                 animal.setCount(4 / speed);
                 checkRun(animal);
             }
-            if ((animal instanceof Ballom || animal instanceof Oneal
+            if ((animal instanceof Balloon || animal instanceof Oneal
                     || animal instanceof Doll || animal instanceof Kondoria)
                     && Blocked.block_right(animal)) {
                 animal.setDirection("right");
@@ -328,18 +328,18 @@ public class Move {
             }
         }
 
-        if (animal instanceof Ballom && animal.getY() % 8 == 0) {
+        if (animal instanceof Balloon && animal.getY() % 8 == 0) {
             if (animal.getSwap() == 1) {
-                animal.setImg(Sprite.ballom_left1.getFxImage());
+                animal.setImg(Sprite.balloon_left1.getFxImage());
                 animal.setSwap(2);
             } else if (animal.getSwap() == 2) {
-                animal.setImg(Sprite.ballom_left2.getFxImage());
+                animal.setImg(Sprite.balloon_left2.getFxImage());
                 animal.setSwap(3);
             } else if (animal.getSwap() == 3) {
-                animal.setImg(Sprite.ballom_left3.getFxImage());
+                animal.setImg(Sprite.balloon_left3.getFxImage());
                 animal.setSwap(4);
             } else {
-                animal.setImg(Sprite.ballom_left2.getFxImage());
+                animal.setImg(Sprite.balloon_left2.getFxImage());
                 animal.setSwap(1);
             }
         }

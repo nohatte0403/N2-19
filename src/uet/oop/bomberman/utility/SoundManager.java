@@ -10,7 +10,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 
 import static uet.oop.bomberman.BombermanGame.player;
-import static uet.oop.bomberman.level.NextLevel.wait;
+import static uet.oop.bomberman.levels.NextLevel.wait;
 
 public class SoundManager extends JFrame {
     public static Clip title_screen;
