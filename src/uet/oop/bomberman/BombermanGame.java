@@ -100,7 +100,7 @@ public class BombermanGame extends Application {
 
         stage.setScene(scene);
         stage.setTitle("Bomberman from N2-19");
-        Image icon = new Image("images/ttsalpha4.0@0.5x.png");
+        Image icon = new Image("images/iconGame.png");
         stage.getIcons().add(icon);
         mainStage = stage;
         mainStage.show();
