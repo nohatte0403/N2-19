@@ -29,38 +29,52 @@ public class CreateMap {
             _height = Integer.parseInt(tokens.nextToken());
             _width = Integer.parseInt(tokens.nextToken());
 
-            while (sc.hasNextLine()) {
-                idObjects = new int[_width][_height];
-                listKill = new int[_width][_height];
-                for (int i = 0; i < _height; ++i) {
-                    String lineTile = sc.nextLine();
-                    StringTokenizer tokenTile = new StringTokenizer(lineTile);
+            idObjects = new int[_width][_height];
+            listKill = new int[_width][_height];
 
-                    for (int j = 0; j < _width; j++) {
-                        int s = Integer.parseInt(tokenTile.nextToken());
-                        Entity entity;
-                        switch (s) {
-                            case 1:
-                                entity = new Portal(j, i, Sprite.grass.getFxImage());
-                                s = 0;
-                                break;
-                            case 2:
-                                entity = new Wall(j, i, Sprite.wall.getFxImage());
-                                break;
-                            case 3:
-                                entity = new Brick(j, i, Sprite.brick.getFxImage());
-                                break;
-                            case 6:
-                                entity = new SpeedItem(j, i, Sprite.brick.getFxImage());
-                                break;
-                            case 7:
-                                entity = new FlameItem(j, i, Sprite.brick.getFxImage());
-                                break;
-                            default:
-                                entity = new Grass(j, i, Sprite.grass.getFxImage());
+            for (int i = 0; i < _height; ++i) {
+                String lineTile = sc.nextLine();
+                StringTokenizer tokenTile = new StringTokenizer(lineTile);
+
+                for (int j = 0; j < _width; j++) {
+                    int s = Integer.parseInt(tokenTile.nextToken());
+                    idObjects[j][i] = s;
+
+                    switch (s) {
+                        case 1: { // Portal dưới brick
+                            Entity portal = new Portal(j, i, Sprite.portal.getFxImage());
+                            block.add(new Grass(j, i, Sprite.grass.getFxImage()));
+                            block.add(portal);
+                            block.add(new Brick(j, i, Sprite.brick.getFxImage(), portal));
+                            break;
                         }
-                        idObjects[j][i] = s;
-                        block.add(entity);
+                        case 2: { // Tường cố định
+                            block.add(new Wall(j, i, Sprite.wall.getFxImage()));
+                            break;
+                        }
+                        case 3: { // Brick thường
+                            block.add(new Grass(j, i, Sprite.grass.getFxImage()));
+                            block.add(new Brick(j, i, Sprite.brick.getFxImage()));
+                            break;
+                        }
+                        case 6: { // SpeedItem dưới Brick
+                            Entity item = new SpeedItem(j, i, Sprite.powerup_speed.getFxImage());
+                            block.add(new Grass(j, i, Sprite.grass.getFxImage()));
+                            block.add(item);
+                            block.add(new Brick(j, i, Sprite.brick.getFxImage(), item));
+                            break;
+                        }
+                        case 7: { // FlameItem dưới Brick
+                            Entity item = new FlameItem(j, i, Sprite.powerup_flames.getFxImage());
+                            block.add(new Grass(j, i, Sprite.grass.getFxImage()));
+                            block.add(item);
+                            block.add(new Brick(j, i, Sprite.brick.getFxImage(), item));
+                            break;
+                        }
+                        default: {
+                            block.add(new Grass(j, i, Sprite.grass.getFxImage()));
+                            break;
+                        }
                     }
                 }
             }
