@@ -38,8 +38,20 @@ public class Level1 {
         Image transparent = new Image("images/transparent.png");
         authorView.setImage(transparent);
 
-        /*
-        Add enemies
-         */
+        Animal enemy1 = new Balloon(4, 4, Sprite.balloon_left1.getFxImage());
+        Animal enemy2 = new Balloon(9, 9, Sprite.balloon_left1.getFxImage());
+        Animal enemy3 = new Balloon(22, 6, Sprite.balloon_left1.getFxImage());
+        enemy.add(enemy1);
+        enemy.add(enemy2);
+        enemy.add(enemy3);
+
+        Animal enemy4 = new Oneal(7, 6, Sprite.oneal_right1.getFxImage());
+        Animal enemy5 = new Oneal(13, 8, Sprite.oneal_right1.getFxImage());
+        enemy.add(enemy4);
+        enemy.add(enemy5);
+
+        for (Animal animal : enemy) {
+            animal.setLife(true);
+        }
     }
 }
