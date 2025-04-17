@@ -9,35 +9,21 @@ import static uet.oop.bomberman.BombermanGame.listKill;
 
 public class Brick extends Entity {
 
-    private boolean destroyed = false;
-    private Entity hiddenItem;
-
     public Brick(int x, int y, Image img) {
         super(x, y, img);
-        this.hiddenItem = null;
     }
 
-    // Constructor để Brick có thể giấu Item
-    public Brick(int x, int y, Image img, Entity hiddenItem) {
-        super(x, y, img);
-        this.hiddenItem = hiddenItem;
+    private void checkHidden() {
+        for (Entity entity : block) {
+            if (entity instanceof Brick)
+                if (listKill[entity.getX() / 32][entity.getY() / 32] == 4) {
+                    entity.setImg(Sprite.grass.getFxImage());
+                }
+        }
     }
 
     @Override
     public void update() {
-        int tileX = getX() / 32;
-        int tileY = getY() / 32;
-
-        // Kiểm tra xem Brick đã bị phá (giá trị 4 trong listKill)
-        if (!destroyed && listKill[tileX][tileY] == 4) {
-            destroyed = true;
-            setImg(Sprite.grass.getFxImage());
-
-            // Nếu có Item giấu dưới Brick, thì thêm vào danh sách block để hiện ra
-            if (hiddenItem != null) {
-                block.add(hiddenItem);
-                hiddenItem = null;
-            }
-        }
+        checkHidden();
     }
 }
