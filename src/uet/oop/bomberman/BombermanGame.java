@@ -99,7 +99,7 @@ public class BombermanGame extends Application {
         });
 
         stage.setScene(scene);
-        stage.setTitle("Bomberman from Son Tran");
+        stage.setTitle("Bomberman from N2-19");
         Image icon = new Image("images/ttsalpha4.0@0.5x.png");
         stage.getIcons().add(icon);
         mainStage = stage;
@@ -168,7 +168,7 @@ public class BombermanGame extends Application {
         long now = System.currentTimeMillis();
         if (now - lastTime > 1000) {
             lastTime = System.currentTimeMillis();
-            mainStage.setTitle("Bomberman from Son Tran | " + frame + " frame");
+            mainStage.setTitle("Bomberman from N2-19 | " + frame + " frame");
             frame = 0;
 
             time.setText("Time: " + timeNumber);
