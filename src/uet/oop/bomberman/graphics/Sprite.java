@@ -81,8 +81,8 @@ public class Sprite {
 
 	//Doll
 	public static Sprite doll_left1 = new Sprite(DEFAULT_SIZE, 3, 3, SpriteSheet.tiles, 16, 16);
-	public static Sprite doll_left2 = new Sprite(DEFAULT_SIZE, 4, 1, SpriteSheet.tiles, 16, 16);
-	public static Sprite doll_left3 = new Sprite(DEFAULT_SIZE, 4, 0, SpriteSheet.tiles, 16, 16);
+	public static Sprite doll_left2 = new Sprite(DEFAULT_SIZE, 1, 4, SpriteSheet.tiles, 16, 16);
+	public static Sprite doll_left3 = new Sprite(DEFAULT_SIZE, 0, 4, SpriteSheet.tiles, 16, 16);
 
 	public static Sprite doll_right1 = new Sprite(DEFAULT_SIZE, 2, 4, SpriteSheet.tiles, 16, 16);
 	public static Sprite doll_right2 = new Sprite(DEFAULT_SIZE, 4, 0, SpriteSheet.tiles, 16, 16);
@@ -104,10 +104,10 @@ public class Sprite {
 	//Kondoria
 	public static Sprite kondoria_left1 = new Sprite(DEFAULT_SIZE, 6, 0, SpriteSheet.tiles, 16, 16);
 	public static Sprite kondoria_left2 = new Sprite(DEFAULT_SIZE, 6, 1, SpriteSheet.tiles, 16, 16);
-	public static Sprite kondoria_left3 = new Sprite(DEFAULT_SIZE, 6, 5, SpriteSheet.tiles, 16, 16);
+	public static Sprite kondoria_left3 = new Sprite(DEFAULT_SIZE, 5, 6, SpriteSheet.tiles, 16, 16);
 
-	public static Sprite kondoria_right1 = new Sprite(DEFAULT_SIZE, 5, 2, SpriteSheet.tiles, 16, 16);
-	public static Sprite kondoria_right2 = new Sprite(DEFAULT_SIZE, 6, 8, SpriteSheet.tiles, 16, 16);
+	public static Sprite kondoria_right1 = new Sprite(DEFAULT_SIZE, 6, 2, SpriteSheet.tiles, 16, 16);
+	public static Sprite kondoria_right2 = new Sprite(DEFAULT_SIZE, 6, 3, SpriteSheet.tiles, 16, 16);
 	public static Sprite kondoria_right3 = new Sprite(DEFAULT_SIZE, 6, 4, SpriteSheet.tiles, 16, 16);
 
 	public static Sprite kondoria_dead = new Sprite(DEFAULT_SIZE, 4, 6, SpriteSheet.tiles, 16, 16);

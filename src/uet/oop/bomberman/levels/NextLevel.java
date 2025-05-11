@@ -18,7 +18,7 @@ public class NextLevel {
             if (now - waitingTime > 3000) {
                 switch (_level) {
                     case 1:
-                        isPortal = false;
+                        //isPortal = false;
                         new Level2();
                         break;
                     case 2:
