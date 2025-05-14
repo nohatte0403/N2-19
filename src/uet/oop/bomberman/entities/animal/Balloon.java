@@ -57,16 +57,18 @@ public class Balloon extends Animal {
 
     @Override
     public void update() {
-        kill();
-        countKill++;
+        kill();       // check xem Balloon có chết không.
+        countKill++; // đếm frame.
         for (Animal animal : enemy) {
+
+            // duyệt danh sách enemy xem có Balloon nào chết không:
             if (animal instanceof Balloon && !animal.life)
-                killBalloon(animal);
+                killBalloon(animal); // thực hiện hiệu ứng chết của Balloon.
         }
 
-        if (this.y % 16 == 0 && this.x % 16 == 0) {
+        if (this.y % 16 == 0 && this.x % 16 == 0) { // Balloon thực hiện di chuyển khi tọa độ pixel chia hết cho 16.
             Random random = new Random();
-            int dir = random.nextInt(4);
+            int dir = random.nextInt(4);    // sinh ngẫu nhiên số từ 0 đến 3.
             switch (dir) {
                 case 0:
                     Move.down(this);

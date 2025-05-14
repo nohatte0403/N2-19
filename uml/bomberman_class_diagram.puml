@@ -151,8 +151,70 @@ package "bomberman.entities.animal" {
 }
 
 package "bomberman.entities.animal.intelligent" {
-  class AStar
-  class Node
+  class AStar {
+      - Node[][] searchArea
+      - PriorityQueue<Node> openList
+      - Set<Node> closedSet
+      - Node initialNode
+      - Node finalNode
+
+      + AStar(int rows, int cols, Node initialNode, Node finalNode)
+      + void setNodes()
+      + void setBlocks(int[][] blocksArray, int count)
+      + List<Node> findPath()
+      + List<Node> getPath(Node currentNode)
+      + void addAdjacentNodes(Node currentNode)
+      + void addAdjacentLowerRow(Node currentNode)
+      + void addAdjacentMiddleRow(Node currentNode)
+      + void addAdjacentUpperRow(Node currentNode)
+      + void checkNode(Node currentNode, int col, int row)
+      + boolean isFinalNode(Node currentNode)
+      + boolean isEmpty(PriorityQueue<Node> openList)
+      + void setBlock(int row, int col)
+      + Node getInitialNode()
+      + void setInitialNode(Node initialNode)
+      + Node getFinalNode()
+      + void setFinalNode(Node finalNode)
+      + Node[][] getSearchArea()
+      + void setSearchArea(Node[][] searchArea)
+      + PriorityQueue<Node> getOpenList()
+      + void setOpenList(PriorityQueue<Node> openList)
+      + Set<Node> getClosedSet()
+      + void setClosedSet(Set<Node> closedSet)
+  }
+
+  class Node {
+      - int g
+      - int f
+      - int h
+      - int row
+      - int col
+      - boolean isBlock
+      - Node parent
+
+      + Node(int row, int col)
+      + void calculateHeuristic(Node finalNode)
+      + void setNodeData(Node currentNode)
+      + boolean checkBetterPath(Node currentNode)
+      + void calculateFinalCost()
+      + boolean equals(Object arg0)
+      + String toString()
+
+      + int getH()
+      + void setH(int h)
+      + int getG()
+      + void setG(int g)
+      + int getF()
+      + void setF(int f)
+      + Node getParent()
+      + void setParent(Node parent)
+      + boolean isBlock()
+      + void setBlock(boolean isBlock)
+      + int getRow()
+      + void setRow(int row)
+      + int getCol()
+      + void setCol(int col)
+  }
 }
 
 package "bomberman.entities.block" {

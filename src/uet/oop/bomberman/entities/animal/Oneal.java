@@ -49,6 +49,7 @@ public class Oneal extends Animal {
                 killOneal(animal);
         }
 
+        // Thực hiện di chuyển theo đuổi player.
         if (this.y % 16 == 0 && this.x % 16 == 0) {
             if (player.getX() < this.x) {
                 Move.left(this);

@@ -1,0 +1,74 @@
+@startuml
+left to right direction
+skinparam linetype ortho
+skinparam classAttributeIconSize 0
+skinparam classFontSize 12
+
+' Các lớp kế thừa từ Entity
+class Entity
+abstract class Animal
+class Ballom
+class Bomber
+class Doll
+class Kondoria
+class Oneal
+
+Animal -|> Entity
+Ballom -|> Animal
+Bomber -|> Animal
+Doll -|> Animal
+Kondoria -|> Animal
+Oneal -|> Animal
+
+' Ép các lớp đứng cùng hàng bằng cách nối note trống
+Entity -[hidden]-> Animal
+Animal -[hidden]-> Ballom
+Ballom -[hidden]-> Bomber
+Bomber -[hidden]-> Doll
+Doll -[hidden]-> Kondoria
+Kondoria -[hidden]-> Oneal
+
+' Các lớp kế thừa từ Items
+abstract class Items
+class FlameItem
+class SpeedItem
+
+Items -|> Entity
+FlameItem -|> Items
+SpeedItem -|> Items
+
+Items -[hidden]-> FlameItem
+FlameItem -[hidden]-> SpeedItem
+
+' Các lớp Entity khác
+class Bomb
+class Brick
+class Grass
+class Portal
+class Wall
+
+Bomb -|> Entity
+Brick -|> Entity
+Grass -|> Entity
+Portal -|> Entity
+Wall -|> Entity
+
+Bomb -[hidden]-> Brick
+Brick -[hidden]-> Grass
+Grass -[hidden]-> Portal
+Portal -[hidden]-> Wall
+
+' Lớp khác
+class SoundManager
+class BombermanGame
+
+SoundManager -|> JFrame
+BombermanGame -|> Application
+
+SoundManager -[hidden]-> BombermanGame
+
+class Sprite
+class SpriteSheet
+Sprite -[hidden]-> SpriteSheet
+
+@enduml

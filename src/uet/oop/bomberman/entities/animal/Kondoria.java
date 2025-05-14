@@ -10,7 +10,7 @@ public class Kondoria extends Animal {
 
     private static int swapKill = 1;
     private static int countKill = 0;
-    private static boolean dir;
+    private static boolean dir; // Hướng di chuyển (true: trái, false: phải)
 
     public Kondoria(int x, int y, Image img) {
         super(x, y, img);
@@ -52,13 +52,17 @@ public class Kondoria extends Animal {
         }
 
         if (this.y % 16 == 0 && this.x % 16 == 0) {
-            if (this.x / 32 <= 1 || this.x / 32 >= _width - 2)
+            // Đổi hướng khi chạm biên trái (x <= 1) hoặc biên phải (x >= _width - 2)
+            if (this.x / 32 <= 1 || this.x / 32 >= _width - 2) {
                 dir = !dir;
+            }
 
-            if (dir)
+            if (dir) {
                 Move.left(this);
-            else
+            }
+            else {
                 Move.right(this);
+            }
         }
     }
 }
