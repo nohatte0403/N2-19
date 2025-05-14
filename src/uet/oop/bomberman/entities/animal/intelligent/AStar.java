@@ -2,12 +2,13 @@ package uet.oop.bomberman.entities.animal.intelligent;
 
 import java.util.*;
 
+//code tìm đường đi ngắn nhất đến bomber, né các vật cản
 public class AStar {
-    private Node[][] searchArea;
-    private PriorityQueue<Node> openList;
-    private Set<Node> closedSet;
-    private Node initialNode;
-    private Node finalNode;
+    private Node[][] searchArea; //ma trận các node
+    private PriorityQueue<Node> openList; //các node chờ xét
+    private Set<Node> closedSet; //các node đã xét xong
+    private Node initialNode; //node đầu
+    private Node finalNode; //node cuối
 
     public AStar(int rows, int cols, Node initialNode, Node finalNode) {
         setInitialNode(initialNode);
@@ -39,18 +40,23 @@ public class AStar {
     public List<Node> findPath() {
         openList.add(initialNode);
         while (!isEmpty(openList)) {
-            Node currentNode = openList.poll();
+            Node currentNode = openList.poll(); //lấy node có f nhỏ nhất
             closedSet.add(currentNode);
             assert currentNode != null;
             if (isFinalNode(currentNode)) {
                 return getPath(currentNode);
             } else {
-                addAdjacentNodes(currentNode);
+                addAdjacentNodes(currentNode); // thêm node hàng xóm vào openList
             }
         }
         return new ArrayList<Node>();
     }
 
+    /**
+     * truy ngược parent từ final về init
+     * @param currentNode node đang xét
+     * @return danh sách đường đi hợp lệ
+     */
     private List<Node> getPath(Node currentNode) {
         List<Node> path = new ArrayList<Node>();
         path.add(currentNode);
@@ -63,9 +69,9 @@ public class AStar {
     }
 
     private void addAdjacentNodes(Node currentNode) {
-        addAdjacentUpperRow(currentNode);
-        addAdjacentMiddleRow(currentNode);
-        addAdjacentLowerRow(currentNode);
+        addAdjacentUpperRow(currentNode); // hàng trên
+        addAdjacentMiddleRow(currentNode); // hàng hiện tại
+        addAdjacentLowerRow(currentNode); //hàng dưới
     }
 
     private void addAdjacentLowerRow(Node currentNode) {
@@ -111,11 +117,14 @@ public class AStar {
 
     private void checkNode(Node currentNode, int col, int row) {
         Node adjacentNode = getSearchArea()[row][col];
+        //nếu chưa gặp vật cản, chưa xét
         if (!adjacentNode.isBlock() && !getClosedSet().contains(adjacentNode)) {
+            //nếu chưa trong openList -> thêm
             if (!getOpenList().contains(adjacentNode)) {
                 adjacentNode.setNodeData(currentNode);
                 getOpenList().add(adjacentNode);
             } else {
+                //nếu đã trong openList ->kiểm tra đường mới có tốt không
                 boolean changed = adjacentNode.checkBetterPath(currentNode);
                 if (changed) {
                     getOpenList().remove(adjacentNode);

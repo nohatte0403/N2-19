@@ -18,6 +18,9 @@ import static uet.oop.bomberman.utility.SoundManager.isSoundDied;
 import static uet.oop.bomberman.utility.SoundManager.isSoundTitle;
 
 public class Level3 {
+    /**
+     * 2 Balloon, 1 Doll	40 bomb
+     */
     public Level3() {
         enemy.clear();
         block.clear();

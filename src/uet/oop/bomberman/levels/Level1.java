@@ -18,12 +18,16 @@ import static uet.oop.bomberman.utility.SoundManager.isSoundDied;
 import static uet.oop.bomberman.utility.SoundManager.isSoundTitle;
 
 public class Level1 {
+    /**
+     * khởi tạo lại toàn bộ
+     * lvl 1: 3 Balloon, 2 Oneal, 20 bomb
+     */
     public Level1() {
         enemy.clear();
         block.clear();
         swapKill = 1;
         powerBomb = 0;
-        new CreateMap("res/levels/Level1.txt");
+        new CreateMap("res/levels/Level1.txt"); //tạo map theo ảnh
         player.setLife(true);
         player.setX(32);
         player.setY(32);

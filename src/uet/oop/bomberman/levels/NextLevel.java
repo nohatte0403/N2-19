@@ -10,11 +10,15 @@ public class NextLevel {
     public static boolean wait;
     public static long waitingTime;
 
+    /**
+     * đợi chuyển màn
+     */
     public static void waitToLevelUp() {
         if (wait) {
-            Image waitToNext = new Image("images/levelUp.png");
+            Image waitToNext = new Image("images/levelUp.png"); //hiển thị ảnh
             authorView.setImage(waitToNext);
             long now = System.currentTimeMillis();
+            //chuyển màn sau 3s
             if (now - waitingTime > 3000) {
                 switch (_level) {
                     case 1:

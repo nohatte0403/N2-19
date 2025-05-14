@@ -44,7 +44,7 @@ public class BombermanGame extends Application {
     public static int[][] listKill;     //Array containing dead positions
     public static Animal player;
     public static boolean running;
-    public static ImageView authorView;
+    public static ImageView authorView; //hiển thị ảnh
 
     private GraphicsContext gc;
     private Canvas canvas;
@@ -54,14 +54,16 @@ public class BombermanGame extends Application {
 
     public static Stage mainStage = null;
 
-
+    /**
+     * gọi Start() để bắt đầu JavaFX
+     */
     public static void main(String[] args) {
         Application.launch(BombermanGame.class);
     }
 
     @Override
     public void start(Stage stage) {
-        canvas = new Canvas(Sprite.SCALED_SIZE * WIDTH, Sprite.SCALED_SIZE * HEIGHT);
+        canvas = new Canvas(Sprite.SCALED_SIZE * WIDTH, Sprite.SCALED_SIZE * HEIGHT); //vẽ các đối tượng
         canvas.setTranslateY(32);
         gc = canvas.getGraphicsContext2D();
         Image author = new Image("images/author.png");
@@ -71,12 +73,13 @@ public class BombermanGame extends Application {
         authorView.setScaleX(0.5);
         authorView.setScaleY(0.5);
         Group root = new Group();
-        Menu.createMenu(root);
+        Menu.createMenu(root); //hiện thanh menu
         root.getChildren().add(canvas);
         root.getChildren().add(authorView);
 
         Scene scene = new Scene(root);
 
+        // phím mũi tên để di chuyển, SPACE để đặt bom
         scene.setOnKeyPressed(event -> {
             if (player.isLife())
                 switch (event.getCode()) {
@@ -107,27 +110,31 @@ public class BombermanGame extends Application {
 
         lastTime = System.currentTimeMillis();
 
+        //khởi tạo vòng lặp game
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long l) {
                 if (running) {
-                    render();
-                    update();
-                    time();
+                    render(); //vẽ tất cả
+                    update(); //cập nhật logic game
+                    time(); //thời gian đếm ngược
                     updateMenu();
                 }
             }
         };
         timer.start();
 
-        player = new Bomber(1, 1, Sprite.player_right_2.getFxImage());
+        player = new Bomber(1, 1, Sprite.player_right_2.getFxImage()); //tạo người chơi
         player.setLife(false);
     }
 
+    /**
+     * cập nhật logic game
+     */
     public void update() {
-        block.forEach(Entity::update);
-        enemy.forEach(Entity::update);
-        player.update();
+        block.forEach(Entity::update);//cập nhật block
+        enemy.forEach(Entity::update);//cập nhật enemy
+        player.update();//cập nhật player
 
         player.setCountToRun(player.getCountToRun() + 1);
         if (player.getCountToRun() == 4) {
@@ -143,20 +150,22 @@ public class BombermanGame extends Application {
             }
         }
 
+        //nếu không còn quái và chưa có cổng ->tạo cổng
         if (enemy.size() == 0 && !isPortal && !wait) {
             Entity portal = new Portal(_width - 2, _height - 2, Sprite.portal.getFxImage());
             block.add(portal);
+            //player đứng vào cổng -> chờ chuyển màn
             if (player.getX() / 32 == portal.getX() / 32 && player.getY() / 32 == portal.getY() / 32) {
                 wait = true;
                 waitingTime = System.currentTimeMillis();
             }
         }
-        waitToLevelUp();
-        updateSound();
+        waitToLevelUp(); //đợi qua màn
+        updateSound(); //âm thanh
     }
 
     public void render() {
-        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight()); //xóa canvas
         block.forEach(g -> g.render(gc));
         enemy.forEach(g -> g.render(gc));
         player.render(gc);
@@ -173,6 +182,7 @@ public class BombermanGame extends Application {
 
             time.setText("Time: " + timeNumber);
             timeNumber--;
+            // hết thời gian -> thua
             if (timeNumber < 0)
                 player.setLife(false);
         }

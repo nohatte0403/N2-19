@@ -1,13 +1,15 @@
 package uet.oop.bomberman.entities.animal.intelligent;
 
 public class Node {
-    private int g;
-    private int f;
-    private int h;
+    // chi phí di chuyển
+    private int g; // từ đầu đến node này
+    private int f; // dự đoán ừ node đến đích
+    private int h; //=f+g
+
     private int row;
     private int col;
     private boolean isBlock;
-    private Node parent;
+    private Node parent; //truy ngược đường đi đã tìm
 
     public Node(int row, int col) {
         super();
@@ -15,10 +17,18 @@ public class Node {
         this.col = col;
     }
 
+    /**
+     * Dự doán chi phí từ node hiện tại đến đích
+     * @param finalNode đích
+     */
     public void calculateHeuristic(Node finalNode) {
         this.h = Math.abs(finalNode.getRow() - getRow()) + Math.abs(finalNode.getCol() - getCol());
     }
 
+    /**
+     * Cập nhật g,f
+     * @param currentNode node đang xét
+     */
     public void setNodeData(Node currentNode) {
         int gCost = currentNode.getG();
         setParent(currentNode);
@@ -26,6 +36,11 @@ public class Node {
         calculateFinalCost();
     }
 
+    /**
+     * kiểm tra nếu có đường tốt hơn
+     * @param currentNode node đã ở trong openList
+     * @return có/không, cập nhật g,f,parent
+     */
     public boolean checkBetterPath(Node currentNode) {
         int gCost = currentNode.getG();
         if (gCost < getG()) {
