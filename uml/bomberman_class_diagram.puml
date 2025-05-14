@@ -1,0 +1,324 @@
+@startuml
+left to right direction
+skinparam linetype ortho
+skinparam classAttributeIconSize 0
+skinparam classFontSize 12
+skinparam classAttributeFontSize 11
+skinparam classMethodFontSize 11
+
+' ======================= Packages ==========================
+package "bomberman.control" {
+  class Blocked {
+    + block_down(Entity) : boolean
+    + block_up(Entity) : boolean
+    + block_left(Entity) : boolean
+    + block_right(Entity) : boolean
+    + block_down_bomb(Entity, int) : boolean
+    + block_up_bomb(Entity, int) : boolean
+    + block_left_bomb(Entity, int) : boolean
+    + block_right_bomb(Entity, int) : boolean
+  }
+
+  class Menu {
+    - statusGame : static ImageView
+    - level : static Text
+    - bomb : static Text
+    - time : static Text
+    - bombNumber : static int
+    - timeNumber : static int
+    + createMenu(Group)
+    + updateMenu()
+  }
+
+  class Move {
+    + checkRun(Animal)
+    + setDirection(String, Animal, int)
+    + down(Animal)
+    + down_step(Animal)
+    + up(Animal)
+    + up_step(Animal)
+    + left(Animal)
+    + left_step(Animal)
+    + right(Animal)
+    + right_step(Animal)
+  }
+}
+
+package "bomberman.entities" {
+  abstract class Entity {
+    - x : int
+    - y : int
+    - img : Image
+    + Entity(int, int, Image)
+    + Entity()
+    + getX()
+    + setX(int)
+    + getY()
+    + setY(int)
+    + getImg()
+    + setImg(Image)
+    + render(GraphicsContext)
+    + update()
+  }
+}
+
+package "bomberman.entities.animal" {
+  abstract class Animal {
+    - isMove : int
+    - swap : int
+    - direction : String
+    - count : int
+    - countToRun : int
+    - life : boolean
+    + Animal(int, int, Image)
+    + Animal(int, int, String, int, int)
+    + Animal(boolean)
+    + Animal()
+    + isLife() : boolean
+    + setLife(boolean)
+    + getIsMove() : int
+    + setIsMove(int)
+    + getSwap() : int
+    + setSwap(int)
+    + getDirection() : String
+    + setDirection(String)
+    + getCount() : int
+    + setCount(int)
+    + getCountToRun() : int
+    + setCountToRun(int)
+    + update()
+  }
+
+  class Ballom {
+    - swapKill : static int
+    - countKill : static int
+    + Ballom(int, int, String, int, int)
+    + Ballom()
+    + Ballom(int, int, Image)
+    + killBalloon(Animal)
+    + kill()
+    + update()
+  }
+
+  class Bomber {
+    - swapKill : static int
+    - countKill : static int
+    + Bomber(int, int, String, int, int)
+    + Bomber()
+    + Bomber(int, int, Image)
+    + killBomber(Animal)
+    + checkBombs()
+    + checkEnemy()
+    + checkEnemy2()
+    + checkEnemy3()
+    + update()
+  }
+
+  class Doll {
+    - swapKill : static int
+    - countKill : static int
+    + Doll(int, int, Image)
+    + Doll(int, int, String, int, int)
+    + Doll(boolean)
+    + Doll()
+    + killDoll(Animal)
+    + moveDoll()
+    + update()
+  }
+
+  class Kondoria {
+    - swapKill : static int
+    - countKill : static int
+    - dir : static boolean
+    + Kondoria(int, int, Image)
+    + Kondoria(int, int, String, int, int)
+    + Kondoria(boolean)
+    + Kondoria()
+    + killKondoria(Animal)
+    + update()
+  }
+
+  class Oneal {
+    - swapKill : static int
+    - countKill : static int
+    + Oneal(int, int, Image)
+    + Oneal(int, int, String, int, int)
+    + Oneal(boolean)
+    + Oneal()
+    + killOneal(Animal)
+    + update()
+  }
+}
+
+package "bomberman.entities.animal.intelligent" {
+  class AStar
+  class Node
+}
+
+package "bomberman.entities.block" {
+  class Bomb {
+    - timeBomb : static long
+    - timeTmp : static long
+    - bomb : static Entity
+    - swapActive : static int
+    - swapExplosion : static int
+    - listBombMiddleW : static List<Entity>
+    - listBombMiddleH : static List<Entity>
+    - powerBomb : static int
+    - powerBombDown : static int
+    - powerBombUp : static int
+    - powerBombLeft : static int
+    - powerBombRight : static int
+    - edge_down : static Entity
+    - edge_up : static Entity
+    - edge_left : static Entity
+    - edge_right : static Entity
+    - isEdge : static boolean
+    - isMiddle : static boolean
+    - isBomb : static int
+    + Bomb(int, int, Image)
+    + putBomb()
+    + activeBomb()
+    + createEdge()
+    + createMiddle()
+    + explosionCenter()
+    + checkActive()
+    + checkExplosion()
+    + update()
+  }
+
+  class Brick {
+    + Brick(int, int, Image)
+    + checkHidden()
+    + update()
+  }
+
+  class Grass {
+    + Grass(int, int, Image)
+    + update()
+  }
+
+  class Portal {
+    - isPortal : static boolean
+    + Portal(int, int, Image)
+    + update()
+  }
+
+  class Wall {
+    + Wall(int, int, Image)
+    + update()
+  }
+}
+
+package "bomberman.entities.item" {
+  abstract class Items {
+    - received : boolean
+    + Items(int, int, Image)
+    + Items(boolean)
+    + Items()
+    + isReceived()
+    + setReceived(boolean)
+    + update()
+  }
+
+  class FlameItem {
+    + FlameItem(int, int, Image)
+    + FlameItem(boolean)
+    + FlameItem()
+    + update()
+  }
+
+  class SpeedItem {
+    - speed : static int
+    + SpeedItem(int, int, Image)
+    + SpeedItem(boolean)
+    + SpeedItem()
+    + update()
+  }
+}
+
+package "bomberman.graphics" {
+  class CreateMap {
+    + CreateMap(String)
+  }
+  class Sprite
+  class SpriteSheet
+}
+
+package "bomberman.level" {
+  class Level1 {
+    + Level1()
+  }
+  class Level2 {
+    + Level2()
+  }
+  class Level3 {
+    + Level3()
+  }
+  class NextLevel {
+    - wait : static boolean
+    - waitingTime : static long
+    + waitToLevelUp()
+  }
+}
+
+package "bomberman.utility" {
+  class SoundManager {
+    - title_screen : static Clip
+    - bomb_explosion : static Clip
+    - just_died : static Clip
+    - isSoundDied : static boolean
+    - isSoundTitle : static boolean
+    - isSoundComplete : static boolean
+    + SoundManager(String, String)
+    + updateSound()
+  }
+}
+
+class BombermanGame {
+  - WIDTH : static final int
+  - HEIGHT : static final int
+  - _width : static int
+  - _height : static int
+  - _level : static int
+  - block : static final List<Entity>
+  - enemy : static List<Animal>
+  - idObjects : static int[][]
+  - listKill : static int[][]
+  - player : static Animal
+  - running : static boolean
+  - authorView : static ImageView
+  - gc : GraphicsContext
+  - canvas : Canvas
+  - frame : int
+  - lastTime : long
+  - mainStage : static Stage
+  + main(String[])
+  + start(Stage)
+  + update()
+  + render()
+  + time()
+}
+
+' ==================== Relationships ========================
+Animal -|> Entity
+Ballom -|> Animal
+Bomber -|> Animal
+Doll -|> Animal
+Kondoria -|> Animal
+Oneal -|> Animal
+
+FlameItem -|> Items
+SpeedItem -|> Items
+Items -|> Entity
+
+Bomb -|> Entity
+Brick -|> Entity
+Grass -|> Entity
+Portal -|> Entity
+Wall -|> Entity
+
+SoundManager -|> JFrame
+BombermanGame -|> Application
+
+@enduml
