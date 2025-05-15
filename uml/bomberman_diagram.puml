@@ -4,71 +4,91 @@ skinparam linetype ortho
 skinparam classAttributeIconSize 0
 skinparam classFontSize 12
 
-' Các lớp kế thừa từ Entity
-class Entity
-abstract class Animal
-class Ballom
-class Bomber
-class Doll
-class Kondoria
-class Oneal
+' Gói entities.animal và các lớp con
+package "uet.oop.bomberman.entities.animal" {
+    abstract class Animal
+    class Ballom
+    class Bomber
+    class Doll
+    class Kondoria
+    class Oneal
 
-Animal -|> Entity
-Ballom -|> Animal
-Bomber -|> Animal
-Doll -|> Animal
-Kondoria -|> Animal
-Oneal -|> Animal
+    Animal <|-- Ballom
+    Animal <|-- Bomber
+    Animal <|-- Doll
+    Animal <|-- Kondoria
+    Animal <|-- Oneal
+}
 
-' Ép các lớp đứng cùng hàng bằng cách nối note trống
-Entity -[hidden]-> Animal
-Animal -[hidden]-> Ballom
-Ballom -[hidden]-> Bomber
-Bomber -[hidden]-> Doll
-Doll -[hidden]-> Kondoria
-Kondoria -[hidden]-> Oneal
+' Gói entities.animal.intelligent
+package "uet.oop.bomberman.entities.animal.intelligent" {
+    class AStar
+    class Node
+}
 
-' Các lớp kế thừa từ Items
-abstract class Items
-class FlameItem
-class SpeedItem
+' Gói entities.block
+package "uet.oop.bomberman.entities.block" {
+    class Bomb
+    class Brick
+    class Grass
+    class Portal
+    class Wall
+}
 
-Items -|> Entity
-FlameItem -|> Items
-SpeedItem -|> Items
+' Gói entities.item
+package "uet.oop.bomberman.entities.item" {
+    abstract class Items
+    class FlameItem
+    class SpeedItem
 
-Items -[hidden]-> FlameItem
-FlameItem -[hidden]-> SpeedItem
+    Items <|-- FlameItem
+    Items <|-- SpeedItem
+}
 
-' Các lớp Entity khác
-class Bomb
-class Brick
-class Grass
-class Portal
-class Wall
+' Gói entities
+package "uet.oop.bomberman.entities" {
+    class Entity
 
-Bomb -|> Entity
-Brick -|> Entity
-Grass -|> Entity
-Portal -|> Entity
-Wall -|> Entity
+    Entity <|-- Animal
+    Entity <|-- Bomb
+    Entity <|-- Brick
+    Entity <|-- Grass
+    Entity <|-- Portal
+    Entity <|-- Wall
+    Entity <|-- Items
+}
 
-Bomb -[hidden]-> Brick
-Brick -[hidden]-> Grass
-Grass -[hidden]-> Portal
-Portal -[hidden]-> Wall
+' Gói graphics
+package "uet.oop.bomberman.graphics" {
+    class CreateMap
+    class Sprite
+    class SpriteSheet
+}
 
-' Lớp khác
-class SoundManager
-class BombermanGame
+' Gói level
+package "uet.oop.bomberman.level" {
+    class Level1
+    class Level2
+    class Level3
+    class NextLevel
+}
 
-SoundManager -|> JFrame
-BombermanGame -|> Application
+' Gói utility
+package "uet.oop.bomberman.utility" {
+    class SoundManager
+    SoundManager --|> JFrame
+}
 
-SoundManager -[hidden]-> BombermanGame
+' Gói control
+package "uet.oop.bomberman.control" {
+    class Bocked
+    class Menu
+    class Move
+}
 
-class Sprite
-class SpriteSheet
-Sprite -[hidden]-> SpriteSheet
+' Lớp chính
+class "uet.oop.bomberman.BombermanGame" {
+}
+"uet.oop.bomberman.BombermanGame" --|> Application
 
 @enduml
