@@ -15,16 +15,16 @@ public class SpriteSheet {
 	public final int SIZE;
 	public int[] _pixels;
 	public BufferedImage image;
-
+	//đọc file ảnh tổng
 	public static SpriteSheet tiles = new SpriteSheet("/textures/classic.png", 320);
-	
+	//trích xuất ra pixels
 	public SpriteSheet(String path, int size) {
 		_path = path;
 		SIZE = size;
 		_pixels = new int[SIZE * SIZE];
 		load();
 	}
-	
+	// lấy sprite từ pixels
 	private void load() {
 		try {
 			URL a = SpriteSheet.class.getResource(_path);

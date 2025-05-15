@@ -17,6 +17,7 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class CreateMap {
+    //load map
     public CreateMap(String level) {
         System.out.println(System.getProperty("user.dir"));
         final File fileName = new File(level);
@@ -35,28 +36,28 @@ public class CreateMap {
                 for (int i = 0; i < _height; ++i) {
                     String lineTile = sc.nextLine();
                     StringTokenizer tokenTile = new StringTokenizer(lineTile);
-
+                    // tạo các sprites
                     for (int j = 0; j < _width; j++) {
                         int s = Integer.parseInt(tokenTile.nextToken());
                         Entity entity;
                         switch (s) {
-                            case 1:
+                            case 1: //côổng
                                 entity = new Portal(j, i, Sprite.grass.getFxImage());
                                 s = 0;
                                 break;
-                            case 2:
+                            case 2: //tường
                                 entity = new Wall(j, i, Sprite.wall.getFxImage());
                                 break;
-                            case 3:
+                            case 3: //gạch
                                 entity = new Brick(j, i, Sprite.brick.getFxImage());
                                 break;
-                            case 6:
+                            case 6: //vp tăng tốc
                                 entity = new SpeedItem(j, i, Sprite.brick.getFxImage());
                                 break;
-                            case 7:
+                            case 7: //vp lửa
                                 entity = new FlameItem(j, i, Sprite.brick.getFxImage());
                                 break;
-                            default:
+                            default: //cỏ
                                 entity = new Grass(j, i, Sprite.grass.getFxImage());
                         }
                         idObjects[j][i] = s;

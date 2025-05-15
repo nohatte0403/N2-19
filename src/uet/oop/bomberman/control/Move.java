@@ -20,6 +20,12 @@ public class Move {
         }
     }
 
+    /**
+     * điều chỉnh hướng
+     * @param direction hướng
+     * @param animal quái
+     * @param isMove kiểm tra di chuển
+     */
     private static void setDirection(String direction, Animal animal, int isMove) {
         switch (direction) {
             case "down":
