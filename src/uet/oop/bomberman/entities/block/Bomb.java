@@ -17,14 +17,16 @@ public class Bomb extends Entity {
     private static long timeBomb;
     private static long timeTmp;
     private static Entity bomb;
-    private static int swapActive = 1;
-    private static int swapExplosion = 1;
+    private static int swapActive = 1;    // thay đổi ảnh bom nhấp nháy trong trạng thái chờ nổ.
+    private static int swapExplosion = 1; // điều khiển việc chuyển ảnh động của vụ nổ (3 frame nổ khác nhau).
 
+    // Danh sách các phần vụ nổ giữa theo chiều ngang (W) và dọc (H), dùng cho hiệu ứng nổ lan.
     private static final List<Entity> listBombMiddleW = new ArrayList<>();
     private static final List<Entity> listBombMiddleH = new ArrayList<>();
 
-    public static int powerBomb = 0;
+    public static int powerBomb = 0; // Sức công phá của bom, tức là bom nổ lan bao xa theo các hướng
 
+    // Lưu lại khoảng cách thực tế mà bom có thể lan theo từng hướng, vì có thể bị chặn bởi tường hoặc vật thể.
     private static int powerBombDown = 0;
     private static int powerBombUp = 0;
     private static int powerBombLeft = 0;
@@ -43,6 +45,7 @@ public class Bomb extends Entity {
         super(x, y, img);
     }
 
+    // Đặt bom tại vị trí player.
     public static void putBomb() {
         if (isBomb == 0 && bombNumber > 0) {
             bombNumber--;
@@ -59,6 +62,7 @@ public class Bomb extends Entity {
         }
     }
 
+    // Xử lý hiệu ứng nhấp nháy của bom.
     public static void activeBomb() {
         if (swapActive == 1) {
             bomb.setImg(Sprite.bomb.getFxImage());

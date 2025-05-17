@@ -1,339 +1,486 @@
 @startuml
 left to right direction
-skinparam linetype ortho
 skinparam classAttributeIconSize 0
 skinparam classFontSize 12
 skinparam classAttributeFontSize 11
 skinparam classMethodFontSize 11
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam padding 2
+skinparam ranksep 60
+skinparam nodesep 40
 
 ' ======================= Packages ==========================
 package "bomberman.control" {
-  class Blocked {
-    + block_down(Entity) : boolean
-    + block_up(Entity) : boolean
-    + block_left(Entity) : boolean
-    + block_right(Entity) : boolean
-    + block_down_bomb(Entity, int) : boolean
-    + block_up_bomb(Entity, int) : boolean
-    + block_left_bomb(Entity, int) : boolean
-    + block_right_bomb(Entity, int) : boolean
-  }
+  together {
+    class Blocked {
+      + block_down(Entity) : boolean
+      + block_up(Entity) : boolean
+      + block_left(Entity) : boolean
+      + block_right(Entity) : boolean
+      + block_down_bomb(Entity, int) : boolean
+      + block_up_bomb(Entity, int) : boolean
+      + block_left_bomb(Entity, int) : boolean
+      + block_right_bomb(Entity, int) : boolean
+    }
 
-  class Menu {
-    - statusGame : static ImageView
-    - level : static Text
-    - bomb : static Text
-    - time : static Text
-    - bombNumber : static int
-    - timeNumber : static int
-    + createMenu(Group)
-    + updateMenu()
-  }
+    class Menu {
+      - statusGame : static ImageView
+      - level : static Text
+      - bomb : static Text
+      - time : static Text
+      - bombNumber : static int
+      - timeNumber : static int
+      + createMenu(Group)
+      + updateMenu()
+    }
 
-  class Move {
-    + checkRun(Animal)
-    + setDirection(String, Animal, int)
-    + down(Animal)
-    + down_step(Animal)
-    + up(Animal)
-    + up_step(Animal)
-    + left(Animal)
-    + left_step(Animal)
-    + right(Animal)
-    + right_step(Animal)
+    class Move {
+      + checkRun(Animal)
+      + setDirection(String, Animal, int)
+      + down(Animal)
+      + down_step(Animal)
+      + up(Animal)
+      + up_step(Animal)
+      + left(Animal)
+      + left_step(Animal)
+      + right(Animal)
+      + right_step(Animal)
+    }
   }
 }
 
 package "bomberman.entities" {
-  abstract class Entity {
-    - x : int
-    - y : int
-    - img : Image
-    + Entity(int, int, Image)
-    + Entity()
-    + getX()
-    + setX(int)
-    + getY()
-    + setY(int)
-    + getImg()
-    + setImg(Image)
-    + render(GraphicsContext)
-    + update()
+  together {
+    abstract class Entity {
+      - x : int
+      - y : int
+      - img : Image
+      + Entity(int, int, Image)
+      + Entity()
+      + getX()
+      + setX(int)
+      + getY()
+      + setY(int)
+      + getImg()
+      + setImg(Image)
+      + render(GraphicsContext)
+      + update()
+    }
   }
 }
 
 package "bomberman.entities.animal" {
-  abstract class Animal {
-    - isMove : int
-    - swap : int
-    - direction : String
-    - count : int
-    - countToRun : int
-    - life : boolean
-    + Animal(int, int, Image)
-    + Animal(int, int, String, int, int)
-    + Animal(boolean)
-    + Animal()
-    + isLife() : boolean
-    + setLife(boolean)
-    + getIsMove() : int
-    + setIsMove(int)
-    + getSwap() : int
-    + setSwap(int)
-    + getDirection() : String
-    + setDirection(String)
-    + getCount() : int
-    + setCount(int)
-    + getCountToRun() : int
-    + setCountToRun(int)
-    + update()
-  }
+  together {
+    abstract class Animal {
+      - isMove : int
+      - swap : int
+      - direction : String
+      - count : int
+      - countToRun : int
+      - life : boolean
+      + Animal(int, int, Image)
+      + Animal(int, int, String, int, int)
+      + Animal(boolean)
+      + Animal()
+      + isLife() : boolean
+      + setLife(boolean)
+      + getIsMove() : int
+      + setIsMove(int)
+      + getSwap() : int
+      + setSwap(int)
+      + getDirection() : String
+      + setDirection(String)
+      + getCount() : int
+      + setCount(int)
+      + getCountToRun() : int
+      + setCountToRun(int)
+      + update()
+    }
 
-  class Ballom {
-    - swapKill : static int
-    - countKill : static int
-    + Ballom(int, int, String, int, int)
-    + Ballom()
-    + Ballom(int, int, Image)
-    + killBalloon(Animal)
-    + kill()
-    + update()
-  }
+    class Ballom {
+      - swapKill : static int
+      - countKill : static int
+      + Ballom(int, int, String, int, int)
+      + Ballom()
+      + Ballom(int, int, Image)
+      + killBalloon(Animal)
+      + kill()
+      + update()
+    }
 
-  class Bomber {
-    - swapKill : static int
-    - countKill : static int
-    + Bomber(int, int, String, int, int)
-    + Bomber()
-    + Bomber(int, int, Image)
-    + killBomber(Animal)
-    + checkBombs()
-    + checkEnemy()
-    + checkEnemy2()
-    + checkEnemy3()
-    + update()
-  }
+    class Bomber {
+      - swapKill : static int
+      - countKill : static int
+      + Bomber(int, int, String, int, int)
+      + Bomber()
+      + Bomber(int, int, Image)
+      + killBomber(Animal)
+      + checkBombs()
+      + checkEnemy()
+      + checkEnemy2()
+      + checkEnemy3()
+      + update()
+    }
 
-  class Doll {
-    - swapKill : static int
-    - countKill : static int
-    + Doll(int, int, Image)
-    + Doll(int, int, String, int, int)
-    + Doll(boolean)
-    + Doll()
-    + killDoll(Animal)
-    + moveDoll()
-    + update()
-  }
+    class Doll {
+      - swapKill : static int
+      - countKill : static int
+      + Doll(int, int, Image)
+      + Doll(int, int, String, int, int)
+      + Doll(boolean)
+      + Doll()
+      + killDoll(Animal)
+      + moveDoll()
+      + update()
+    }
 
-  class Kondoria {
-    - swapKill : static int
-    - countKill : static int
-    - dir : static boolean
-    + Kondoria(int, int, Image)
-    + Kondoria(int, int, String, int, int)
-    + Kondoria(boolean)
-    + Kondoria()
-    + killKondoria(Animal)
-    + update()
-  }
+    class Kondoria {
+      - swapKill : static int
+      - countKill : static int
+      - dir : static boolean
+      + Kondoria(int, int, Image)
+      + Kondoria(int, int, String, int, int)
+      + Kondoria(boolean)
+      + Kondoria()
+      + killKondoria(Animal)
+      + update()
+    }
 
-  class Oneal {
-    - swapKill : static int
-    - countKill : static int
-    + Oneal(int, int, Image)
-    + Oneal(int, int, String, int, int)
-    + Oneal(boolean)
-    + Oneal()
-    + killOneal(Animal)
-    + update()
+    class Oneal {
+      - swapKill : static int
+      - countKill : static int
+      + Oneal(int, int, Image)
+      + Oneal(int, int, String, int, int)
+      + Oneal(boolean)
+      + Oneal()
+      + killOneal(Animal)
+      + update()
+    }
+
+    ' Force horizontal arrangement
+    Animal -[hidden]-> Ballom
+    Ballom -[hidden]-> Bomber
+    Bomber -[hidden]-> Doll
+    Doll -[hidden]-> Kondoria
+    Kondoria -[hidden]-> Oneal
   }
 }
 
 package "bomberman.entities.animal.intelligent" {
-  class AStar {
+  together {
+    class AStar {
       - Node[][] searchArea
       - PriorityQueue<Node> openList
       - Set<Node> closedSet
       - Node initialNode
       - Node finalNode
-
       + AStar(int rows, int cols, Node initialNode, Node finalNode)
-      + void setNodes()
-      + void setBlocks(int[][] blocksArray, int count)
-      + List<Node> findPath()
-      + List<Node> getPath(Node currentNode)
-      + void addAdjacentNodes(Node currentNode)
-      + void addAdjacentLowerRow(Node currentNode)
-      + void addAdjacentMiddleRow(Node currentNode)
-      + void addAdjacentUpperRow(Node currentNode)
-      + void checkNode(Node currentNode, int col, int row)
-      + boolean isFinalNode(Node currentNode)
-      + boolean isEmpty(PriorityQueue<Node> openList)
-      + void setBlock(int row, int col)
-      + Node getInitialNode()
-      + void setInitialNode(Node initialNode)
-      + Node getFinalNode()
-      + void setFinalNode(Node finalNode)
-      + Node[][] getSearchArea()
-      + void setSearchArea(Node[][] searchArea)
-      + PriorityQueue<Node> getOpenList()
-      + void setOpenList(PriorityQueue<Node> openList)
-      + Set<Node> getClosedSet()
-      + void setClosedSet(Set<Node> closedSet)
-  }
+      + setNodes()
+      + setBlocks(int[][] blocksArray, int count)
+      + findPath() : List<Node>
+      + getPath(Node currentNode) : List<Node>
+      + addAdjacentNodes(Node currentNode)
+      + addAdjacentLowerRow(Node currentNode)
+      + addAdjacentMiddleRow(Node currentNode)
+      + addAdjacentUpperRow(Node currentNode)
+      + checkNode(Node currentNode, int col, int row)
+      + isFinalNode(Node currentNode) : boolean
+      + isEmpty(PriorityQueue<Node> openList) : boolean
+      + setBlock(int row, int col)
+      + getInitialNode() : Node
+      + setInitialNode(Node initialNode)
+      + getFinalNode() : Node
+      + setFinalNode(Node finalNode)
+      + getSearchArea() : Node[][]
+      + setSearchArea(Node[][] searchArea)
+      + getOpenList() : PriorityQueue<Node>
+      + setOpenList(PriorityQueue<Node> openList)
+      + getClosedSet() : Set<Node>
+      + setClosedSet(Set<Node> closedSet)
+    }
 
-  class Node {
-      - int g
-      - int f
-      - int h
-      - int row
-      - int col
-      - boolean isBlock
-      - Node parent
-
+    class Node {
+      - g : int
+      - f : int
+      - h : int
+      - row : int
+      - col : int
+      - isBlock : boolean
+      - parent : Node
       + Node(int row, int col)
-      + void calculateHeuristic(Node finalNode)
-      + void setNodeData(Node currentNode)
-      + boolean checkBetterPath(Node currentNode)
-      + void calculateFinalCost()
-      + boolean equals(Object arg0)
-      + String toString()
-
-      + int getH()
-      + void setH(int h)
-      + int getG()
-      + void setG(int g)
-      + int getF()
-      + void setF(int f)
-      + Node getParent()
-      + void setParent(Node parent)
-      + boolean isBlock()
-      + void setBlock(boolean isBlock)
-      + int getRow()
-      + void setRow(int row)
-      + int getCol()
-      + void setCol(int col)
+      + calculateHeuristic(Node finalNode)
+      + setNodeData(Node currentNode)
+      + checkBetterPath(Node currentNode) : boolean
+      + calculateFinalCost()
+      + equals(Object arg0) : boolean
+      + toString() : String
+      + getH() : int
+      + setH(int h)
+      + getG() : int
+      + setG(int g)
+      + getF() : int
+      + setF(int f)
+      + getParent() : Node
+      + setParent(Node parent)
+      + isBlock() : boolean
+      + setBlock(boolean isBlock)
+      + getRow() : int
+      + setRow(int row)
+      + getCol() : int
+      + setCol(int col)
+    }
   }
 }
 
 package "bomberman.entities.block" {
-  class Bomb {
-    - timeBomb : static long
-    - timeTmp : static long
-    - bomb : static Entity
-    - swapActive : static int
-    - swapExplosion : static int
-    - listBombMiddleW : static List<Entity>
-    - listBombMiddleH : static List<Entity>
-    - powerBomb : static int
-    - powerBombDown : static int
-    - powerBombUp : static int
-    - powerBombLeft : static int
-    - powerBombRight : static int
-    - edge_down : static Entity
-    - edge_up : static Entity
-    - edge_left : static Entity
-    - edge_right : static Entity
-    - isEdge : static boolean
-    - isMiddle : static boolean
-    - isBomb : static int
-    + Bomb(int, int, Image)
-    + putBomb()
-    + activeBomb()
-    + createEdge()
-    + createMiddle()
-    + explosionCenter()
-    + checkActive()
-    + checkExplosion()
-    + update()
-  }
+  together {
+    class Bomb {
+      - timeBomb : static long
+      - timeTmp : static long
+      - bomb : static Entity
+      - swapActive : static int
+      - swapExplosion : static int
+      - listBombMiddleW : static List<Entity>
+      - listBombMiddleH : static List<Entity>
+      - powerBomb : static int
+      - powerBombDown : static int
+      - powerBombUp : static int
+      - powerBombLeft : static int
+      - powerBombRight : static int
+      - edge_down : static Entity
+      - edge_up : static Entity
+      - edge_left : static Entity
+      - edge_right : static Entity
+      - isEdge : static boolean
+      - isMiddle : static boolean
+      - isBomb : static int
+      + Bomb(int, int, Image)
+      + putBomb()
+      + activeBomb()
+      + createEdge()
+      + createMiddle()
+      + explosionCenter()
+      + checkActive()
+      + checkExplosion()
+      + update()
+    }
 
-  class Brick {
-    + Brick(int, int, Image)
-    + checkHidden()
-    + update()
-  }
+    class Brick {
+      + Brick(int, int, Image)
+      + checkHidden()
+      + update()
+    }
 
-  class Grass {
-    + Grass(int, int, Image)
-    + update()
-  }
+    class Grass {
+      + Grass(int, int, Image)
+      + update()
+    }
 
-  class Portal {
-    - isPortal : static boolean
-    + Portal(int, int, Image)
-    + update()
-  }
+    class Portal {
+      - isPortal : static boolean
+      + Portal(int, int, Image)
+      + update()
+    }
 
-  class Wall {
-    + Wall(int, int, Image)
-    + update()
+    class Wall {
+      + Wall(int, int, Image)
+      + update()
+    }
   }
 }
 
 package "bomberman.entities.item" {
-  abstract class Items {
-    - received : boolean
-    + Items(int, int, Image)
-    + Items(boolean)
-    + Items()
-    + isReceived()
-    + setReceived(boolean)
-    + update()
-  }
+  together {
+    abstract class Items {
+      - received : boolean
+      + Items(int, int, Image)
+      + Items(boolean)
+      + Items()
+      + isReceived() : boolean
+      + setReceived(boolean)
+      + update()
+    }
 
-  class FlameItem {
-    + FlameItem(int, int, Image)
-    + FlameItem(boolean)
-    + FlameItem()
-    + update()
-  }
+    class FlameItem {
+      + FlameItem(int, int, Image)
+      + FlameItem(boolean)
+      + FlameItem()
+      + update()
+    }
 
-  class SpeedItem {
-    - speed : static int
-    + SpeedItem(int, int, Image)
-    + SpeedItem(boolean)
-    + SpeedItem()
-    + update()
+    class SpeedItem {
+      - speed : static int
+      + SpeedItem(int, int, Image)
+      + SpeedItem(boolean)
+      + SpeedItem()
+      + update()
+    }
   }
 }
 
 package "bomberman.graphics" {
-  class CreateMap {
-    + CreateMap(String)
+  together {
+    class CreateMap {
+      + CreateMap(String)
+    }
+
+    class Sprite {
+      - DEFAULT_SIZE : static final int
+      - SCALED_SIZE : static final int
+      - TRANSPARENT_COLOR : static final int
+      - SIZE : final int
+      - _x : int
+      - _y : int
+      - _pixels : int[]
+      - _realWidth : int
+      - _realHeight : int
+      - _sheet : SpriteSheet
+      - transparent : static Sprite
+      - grass : static Sprite
+      - brick : static Sprite
+      - wall : static Sprite
+      - portal : static Sprite
+      - player_up : static Sprite
+      - player_down : static Sprite
+      - player_left : static Sprite
+      - player_right : static Sprite
+      - player_up_1 : static Sprite
+      - player_up_2 : static Sprite
+      - player_down_1 : static Sprite
+      - player_down_2 : static Sprite
+      - player_left_1 : static Sprite
+      - player_left_2 : static Sprite
+      - player_right_1 : static Sprite
+      - player_right_2 : static Sprite
+      - player_dead1 : static Sprite
+      - player_dead2 : static Sprite
+      - player_dead3 : static Sprite
+      - balloon_left1 : static Sprite
+      - balloon_left2 : static Sprite
+      - balloon_left3 : static Sprite
+      - balloon_right1 : static Sprite
+      - balloon_right2 : static Sprite
+      - balloon_right3 : static Sprite
+      - balloon_dead : static Sprite
+      - oneal_left1 : static Sprite
+      - oneal_left2 : static Sprite
+      - oneal_left3 : static Sprite
+      - oneal_right1 : static Sprite
+      - oneal_right2 : static Sprite
+      - oneal_right3 : static Sprite
+      - oneal_dead : static Sprite
+      - doll_left1 : static Sprite
+      - doll_left2 : static Sprite
+      - doll_left3 : static Sprite
+      - doll_right1 : static Sprite
+      - doll_right2 : static Sprite
+      - doll_right3 : static Sprite
+      - doll_dead : static Sprite
+      - minvo_left1 : static Sprite
+      - minvo_left2 : static Sprite
+      - minvo_left3 : static Sprite
+      - minvo_right1 : static Sprite
+      - minvo_right2 : static Sprite
+      - minvo_right3 : static Sprite
+      - minvo_dead : static Sprite
+      - kondoria_left1 : static Sprite
+      - kondoria_left2 : static Sprite
+      - kondoria_left3 : static Sprite
+      - kondoria_right1 : static Sprite
+      - kondoria_right2 : static Sprite
+      - kondoria_right3 : static Sprite
+      - kondoria_dead : static Sprite
+      - mob_dead1 : static Sprite
+      - mob_dead2 : static Sprite
+      - mob_dead3 : static Sprite
+      - bomb : static Sprite
+      - bomb_1 : static Sprite
+      - bomb_2 : static Sprite
+      - bomb_exploded : static Sprite
+      - bomb_exploded1 : static Sprite
+      - bomb_exploded2 : static Sprite
+      - explosion_vertical : static Sprite
+      - explosion_vertical1 : static Sprite
+      - explosion_vertical2 : static Sprite
+      - explosion_horizontal : static Sprite
+      - explosion_horizontal1 : static Sprite
+      - explosion_horizontal2 : static Sprite
+      - explosion_horizontal_left_last : static Sprite
+      - explosion_horizontal_left_last1 : static Sprite
+      - explosion_horizontal_left_last2 : static Sprite
+      - explosion_horizontal_right_last : static Sprite
+      - explosion_horizontal_right_last1 : static Sprite
+      - explosion_horizontal_right_last2 : static Sprite
+      - explosion_vertical_top_last : static Sprite
+      - explosion_vertical_top_last1 : static Sprite
+      - explosion_vertical_top_last2 : static Sprite
+      - explosion_vertical_down_last : static Sprite
+      - explosion_vertical_down_last1 : static Sprite
+      - explosion_vertical_down_last2 : static Sprite
+      - brick_exploded : static Sprite
+      - brick_exploded1 : static Sprite
+      - brick_exploded2 : static Sprite
+      - powerup_bombs : static Sprite
+      - powerup_flames : static Sprite
+      - powerup_speed : static Sprite
+      - powerup_wallpass : static Sprite
+      - powerup_detonator : static Sprite
+      - powerup_bombpass : static Sprite
+      - powerup_flamepass : static Sprite
+      + Sprite(int size, int x, int y, SpriteSheet sheet, int rw, int rh)
+      + Sprite(int size, int color)
+      + setColor(int color)
+      + load()
+      + getSize() : int
+      + getPixel(int i) : int
+      + getFxImage() : Image
+      + resample(Image input, int scaleFactor) : Image
+    }
+
+    class SpriteSheet {
+      - _path : String
+      - SIZE : final int
+      - _pixels : int[]
+      - image : BufferedImage
+      - tiles : static SpriteSheet
+      + SpriteSheet(String path, int size)
+      + load()
+    }
   }
-  class Sprite
-  class SpriteSheet
 }
 
 package "bomberman.level" {
-  class Level1 {
-    + Level1()
-  }
-  class Level2 {
-    + Level2()
-  }
-  class Level3 {
-    + Level3()
-  }
-  class NextLevel {
-    - wait : static boolean
-    - waitingTime : static long
-    + waitToLevelUp()
+  together {
+    class Level1 {
+      + Level1()
+    }
+    class Level2 {
+      + Level2()
+    }
+    class Level3 {
+      + Level3()
+    }
+    class NextLevel {
+      - wait : static boolean
+      - waitingTime : static long
+      + waitToLevelUp()
+    }
   }
 }
 
 package "bomberman.utility" {
-  class SoundManager {
-    - title_screen : static Clip
-    - bomb_explosion : static Clip
-    - just_died : static Clip
-    - isSoundDied : static boolean
-    - isSoundTitle : static boolean
-    - isSoundComplete : static boolean
-    + SoundManager(String, String)
-    + updateSound()
+  together {
+    class SoundManager {
+      - title_screen : static Clip
+      - bomb_explosion : static Clip
+      - just_died : static Clip
+      - isSoundDied : static boolean
+      - isSoundTitle : static boolean
+      - isSoundComplete : static boolean
+      + SoundManager(String, String)
+      + updateSound()
+    }
   }
 }
 

@@ -17,6 +17,7 @@ import uet.oop.bomberman.entities.animal.Bomber;
 import uet.oop.bomberman.entities.block.Bomb;
 import uet.oop.bomberman.entities.block.Portal;
 import uet.oop.bomberman.graphics.Sprite;
+import uet.oop.bomberman.levels.Level3;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -126,6 +127,7 @@ public class BombermanGame extends Application {
 
         player = new Bomber(1, 1, Sprite.player_right_2.getFxImage()); //tạo người chơi
         player.setLife(false);
+
     }
 
     /**
